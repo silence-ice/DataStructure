@@ -1,0 +1,56 @@
+<?php
+/**
+ * 斐波那契数列
+ * 数学定义为：F0=1，F1=1，Fn=F(n-1)+F(n-2)（n>=2，n∈N*）
+ */
+function getFibonacci($n){
+	$arr[0] = 0;
+	$arr[1] = 1;
+	for($i = 2;$i < $n;$i++)
+	{
+	    $arr[$i] = $arr[$i-1] + $arr[$i-2];
+	}
+	return $arr;
+}
+// var_dump(getFibonacci(100));die;
+
+/**
+ * 插值查找--斐波那契查找【有序表查找】
+ */
+function Fibonacci_search($arr, $target){
+	$F = getFibonacci(100);
+
+	$low = 0;
+	$hight = count($arr)-1;
+	$k = 0;
+
+	while ($hight > $F[$k]-1) {
+		$k++;
+	}
+
+	for ($i=$hight; $i < $F[$k]-1; $i++) { 
+		$arr[$i] = $arr[$hight];
+	}
+	while ($low <= $hight) {
+		// $mid = intval(($low+$hight)/2);
+		$mid = $low + $F[$k-1]-1;
+		// var_dump($mid);
+		if ($target < $arr[$mid]) {
+			$hight = $mid-1;
+			$k = $k-1;
+		}else if ($target > $arr[$mid]) {
+			$low = $mid+1;
+			$k = $k-2;
+		}else{
+			if ($mid <= $hight) {
+				return $mid;
+			}else{
+				return $hight;
+			}
+		}			
+	}
+	return false;
+}
+$arr = array("0","6","17","24","35","38","77","99","100");
+$result = Fibonacci_search($arr, "34");
+var_dump($result);

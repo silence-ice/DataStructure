@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>串☞顺序串</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #191970;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>串☞顺序串&amp;链式串</h1>
+<hr />
+<h3>顺序串</h3>
+<blockquote>
+<p>分类：</p>
+<blockquote>
+<p>静态数组结构：存储长度是固定的，如果串的替换函数Replace替换的字符串超过存储长度就有问题了。</p>
+<p>动态数组结构：动态存储就不会出现此问题。</p>
+</blockquote>
+<p>功能方法：</p>
+<pre><code>a. 获取串长度
+b. 获取$pos下的数据
+c. 获取$pos后长度为length的数据
+d. 获取整个串
+e. 字符串反转
+f. 字符串比较
+g. 在$pos位置插入数据
+h. 删除$pos下的数据
+i. 删除$pos到$length下的数据
+</code></pre>
+
+</blockquote>
+<h3>链式串</h3>
+<blockquote>
+<p>如果简单的用链表存储串值，一个结点对应一个字符会造成很大的空间浪费。</p>
+<p>如果一个结点存放多个字符串需要考虑多少个字符比较重要，而且存取、删除操作变得繁琐。</p>
+<p>一般来说顺序串比链式串的内存空间利用率高，也比较好操作，而大部分软件设计中都是使用顺序串来存储的。</p>
+</blockquote>
+<h3>PHP数组模拟顺序串特点</h3>
+<blockquote>
+<p>使用php数组模拟</p>
+<p>无内存空间说法</p>
+<p>数组索引只存一个长度为1的字符</p>
+</blockquote>
+<h3>代码示例</h3>
+<pre><code>&lt;?php
+/**
+ * 顺序串
+ * 1)php数组模拟
+ * 2)无内存空间说法
+ * 3)数组索引只存一个长度为1的字符
+ */
+class SeqString{
+    public $curSize;
+    public $maxSize;
+    public $seqArr;
+
+    public function __construct($arr, $maxSize){
+        $this-&gt;seqArr = $arr;
+        $this-&gt;curSize = $this-&gt;getStringLength($arr);//当前元素个数
+        if ($this-&gt;curSize &gt; $maxSize) {
+            echo &quot;current size length &gt; max size length&quot;;
+            exit;
+        }else{
+
+        }
+        $this-&gt;maxSize = ($this-&gt;curSize &lt;= $maxSize) ? 
+                        $maxSize : 
+                        die(&quot;current size length &gt; max size length&quot;);
+    }
+
+    //获取串长度方法
+    public function getStringLength($strArr){
+        $count = 0;
+        if (empty($strArr)) {
+            return 0;
+        }else{
+            while (1) {
+                if (isset($strArr[$count])) {
+                    $count ++;
+                    continue;
+                }else{
+                    break;
+                }
+            }
+            return $count;
+        }
+    }
+
+    //获取串长度
+    public function getCurSize(){
+        return $this-&gt;curSize;
+    }
+
+    //在$pos位置插入数据
+    public function insertSeqString($pos, $data){
+        if (empty($pos) || empty($data)) {
+            echo &quot;参数不能为空！&quot;;
+            exit;
+        }
+
+        if(strlen($data) != 1){
+            echo &quot;只能插入字符长度为1的元素&quot;;
+            exit;
+        }
+
+        if ($pos &lt; 0 || $pos &gt; $this-&gt;curSize) {
+            echo &quot;插入位置越界！&quot;;
+            exit;
+        }
+
+        //从curSize-1到i逐个往后移
+        for($i=$this-&gt;curSize; $i&gt;$pos; $i--){
+            $this-&gt;seqArr[$i] = $this-&gt;seqArr[$i-1];
+        }
+
+        $this-&gt;seqArr[$pos] = $data;
+        $this-&gt;curSize++;
+
+        return true;
+    }
+
+    //删除$pos下的数据
+    public function DeleteSeqString($pos){
+        if ($this-&gt;curSize == 0) {
+            echo &quot;没有可以删除的元素！&quot;;
+            exit;
+        }
+        if (!isset($pos) || $pos &lt; 0 || $pos &gt; $this-&gt;curSize) {
+            echo &quot;参数不能为空或删除位置越界！&quot;;
+            exit;
+        }
+
+        $result = $this-&gt;seqArr[$pos];
+
+        //从$pos+1到curSize+1逐个往前移
+        for ($i=$pos; $i &lt; $this-&gt;curSize ; $i++) { 
+            if (!isset($this-&gt;seqArr[$i+1])) {
+                unset($this-&gt;seqArr[$i]);
+                break;
+            }
+            $this-&gt;seqArr[$i] = $this-&gt;seqArr[$i+1];
+        }
+
+        $this-&gt;curSize--;
+
+        return $result;
+    }
+
+    //删除$pos到$length下的数据
+    public function DeleteSubSeqString($pos, $length){
+        if ($this-&gt;curSize == 0) {
+            echo &quot;没有可以删除的元素！&quot;;
+            exit;
+        }
+        if (!isset($pos) || $pos &lt; 0 || $pos &gt; $this-&gt;curSize) {
+            echo &quot;参数不能为空或删除位置越界！&quot;;
+            exit;
+        }
+        if($length &lt;= 0){
+            echo &quot;length 需要是正整数。&quot;;
+            exit;
+        }
+
+        $remainLength = $this-&gt;curSize - $pos;//剩余长度
+
+        $length = ($length &gt; $remainLength) ? $remainLength : $length;
+        // if ($length &gt; $remainLength) {
+        //  $length = $remainLength;
+        // }
+
+        //从$pos+1到curSize+1逐个往前移
+        for ($i=$pos; $i &lt; $this-&gt;curSize ; $i++) { 
+            if (!isset($this-&gt;seqArr[$i+$length])) {
+                unset($this-&gt;seqArr[$i]);
+                continue;
+            }
+            $this-&gt;seqArr[$i] = $this-&gt;seqArr[$i+$length];
+        }
+
+        $this-&gt;curSize = $this-&gt;curSize - $length;
+        return &quot;success&quot;;
+    }
+
+    //字符串反转
+    public function reverseSeqString(){
+        if ($this-&gt;curSize == 0) {
+            echo &quot;string length is zero!&quot;;
+            exit;
+        }
+
+        $str = $this-&gt;getSeqString();//获取字符串
+        // $str = &quot;你好啊&quot;;
+        if (preg_match(&quot;/([\x80-\xff][\x40-\xfe])/&quot;, $str, $match)) {
+            //包含汉字
+            $strLen = mb_strlen($str);
+            $newStr = &quot;&quot;;
+            for ($i=$strLen-1; $i &gt;= 0; $i--) {  
+                /*
+                 * mb_substr( $str, $start, $length, $encoding ) 
+                 * $str，需要截断的字符串 
+                 * $start，截断开始处，起始处为0 
+                 * $length，要截取的字数 
+                 * $encoding，网页编码，如utf-8,GB2312,GBK 
+                 */
+                $newStr = $newStr.mb_substr($str, $i, 1, &quot;utf-8&quot;);
+            }
+            return $newStr;
+        } else {
+            //不包含汉字
+            $strLen = strlen($str);
+            $newStr = &quot;&quot;;
+            for ($i=$strLen-1; $i &gt;= 0; $i--) { 
+                $newStr = $newStr.$str[$i];
+            }
+            return $newStr; 
+        }
+    }
+
+    // 字符串比较
+    public function StringCompare($str2){
+        if (!isset($str2)) {
+            return &quot;no isset $str2!&quot;;
+        }
+
+        $str1 = $this-&gt;getSeqString();//获取字符串
+
+        $strLen1 = strlen($str1);
+        $strLen2 = strlen($str2);
+
+        //选取比较短的长度进行匹配
+        $cmpLen = ($strLen1 &gt; $strLen2) ? $strLen2 : $strLen1;
+
+        for ($i=0; $i &lt; $cmpLen; $i++) { 
+            if (ord($str1[$i]) &gt; ord($str2[$i])) {
+                return 1;
+            }else if (ord($str1[$i]) &lt; ord($str2[$i])) {
+                return -1;
+            }else{
+                continue;
+            }
+        }
+
+        if ($strLen1 == $strLen2) {
+            return 0;
+        }else if ($strLen1 &gt; $strLen2) {
+            return 1;
+        }else{
+            return -1;
+        }
+    }
+
+    //字串匹配 Brute-Force
+    public function FindSubString($subStr, $start){
+        $mainLen = $this-&gt;curSize;//8
+        $subLen = $this-&gt;getStringLength($subStr);//3
+        $i = $start;
+        $j = 0;
+        // var_dump($this-&gt;seqArr, $subStr, $mainLen, $subLen);die;
+        while ($i &lt; $mainLen &amp;&amp; $j &lt; $subLen) {
+            if (isset($subStr[$j])) {
+                if ($this-&gt;seqArr[$i] == $subStr[$j]) {
+                    $i++;
+                    $j++;
+                }else{
+                    $j = 0;
+                    $i = $i-$j+1;
+                }
+            }else{
+                break;
+            }
+        }
+
+        if ($j == $subLen) {
+            return $i-$subLen;//匹配的开始索引
+        }else{
+            return -1;
+        }
+    }
+
+    //获取$pos下的数据
+    public function getSingleSeqString($pos){
+        if ($pos &lt; 0 || $pos &gt; $this-&gt;curSize) {
+            echo &quot;插入位置越界！&quot;;
+            exit;
+        }
+
+        return $this-&gt;seqArr[$pos];
+    }
+
+    //获取$pos后长度为length的数据
+    public function getSubSeqString($pos, $length){
+        if ($pos &lt; 0 || $pos &gt; $this-&gt;curSize) {
+            echo &quot;插入位置越界！&quot;;
+            exit;
+        }
+
+        if($length &lt;= 0){
+            echo &quot;length 需要是正整数。&quot;;
+            exit;
+        }
+
+        $remainLength = $this-&gt;curSize - $pos;//剩余长度
+        $subStr = &quot;&quot;;
+
+        if ($length &gt; $remainLength) {
+            $length = $remainLength;
+        }
+
+        for ($i=0; $i &lt; $length; $i++) { 
+            $subStr .= $this-&gt;seqArr[$pos+$i];
+        }
+
+        return $subStr;
+    }
+
+    //获取整个串
+    public function getSeqString(){
+        $str = &quot;&quot;;
+        for ($i=0; $i &lt; $this-&gt;curSize ; $i++) { 
+            $str .= $this-&gt;seqArr[$i];
+        }
+        return $str;
+    }
+}
+
+$initStr = &quot;HuangBin&quot;;
+$arr = array(&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;g&quot;,&quot;B&quot;,&quot;n&quot;);
+$SeqString = new SeqString($arr, 10);
+var_dump($SeqString-&gt;getCurSize());//6
+var_dump($SeqString-&gt;getSeqString());
+var_dump($SeqString-&gt;insertSeqString(&quot;1&quot;,&quot;u&quot;));
+var_dump($SeqString-&gt;insertSeqString(&quot;2&quot;,&quot;u&quot;));
+var_dump($SeqString-&gt;insertSeqString(&quot;7&quot;,&quot;i&quot;));
+var_dump($SeqString-&gt;seqArr);
+
+var_dump($SeqString-&gt;DeleteSeqString(&quot;2&quot;));//6
+var_dump($SeqString-&gt;seqArr);
+
+var_dump($SeqString-&gt;getSingleSeqString(&quot;2&quot;));//a
+var_dump($SeqString-&gt;getSubSeqString(2,3));
+
+// $SeqString-&gt;DeleteSubSeqString(2, 3);
+// var_dump($SeqString-&gt;seqArr);
+
+var_dump($SeqString-&gt;reverseSeqString());
+var_dump($SeqString-&gt;StringCompare(&quot;HuangBin1&quot;));
+
+$arr1 = array(&quot;B&quot;,&quot;i&quot;,&quot;n&quot;);
+var_dump($SeqString-&gt;FindSubString($arr1, 2));
+die;
+</code></pre>
+
+<p>1</p>
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>排序☞冒泡排序</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
+/* Author: Nicolas Hery - http://nicolashery.com */
+/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
+/* Source: https://github.com/nicolahery/markdownpad-github */
+
+/* RESET
+=============================================================================*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* BODY
+=============================================================================*/
+
+body {
+  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+  padding: 20px;
+}
+
+body>*:first-child {
+  margin-top: 0 !important;
+}
+
+body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* BLOCKS
+=============================================================================*/
+
+p, blockquote, ul, ol, dl, table, pre {
+  margin: 15px 0;
+}
+
+/* HEADERS
+=============================================================================*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  color: #000;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  color: #777;
+  font-size: 14px;
+}
+
+body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+  margin-top: 10px;
+}
+
+/* LINKS
+=============================================================================*/
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* LISTS
+=============================================================================*/
+
+ul, ol {
+  padding-left: 30px;
+}
+
+ul li > :first-child, 
+ol li > :first-child, 
+ul li ul:first-of-type, 
+ol li ol:first-of-type, 
+ul li ol:first-of-type, 
+ol li ul:first-of-type {
+  margin-top: 0px;
+}
+
+ul ul, ul ol, ol ol, ol ul {
+  margin-bottom: 0;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0;
+  margin: 15px 0 5px;
+}
+
+dl dt:first-child {
+  padding: 0;
+}
+
+dl dt>:first-child {
+  margin-top: 0px;
+}
+
+dl dt>:last-child {
+  margin-bottom: 0px;
+}
+
+dl dd {
+  margin: 0 0 15px;
+  padding: 0 15px;
+}
+
+dl dd>:first-child {
+  margin-top: 0px;
+}
+
+dl dd>:last-child {
+  margin-bottom: 0px;
+}
+
+/* CODE
+=============================================================================*/
+
+pre, code, tt {
+  font-size: 12px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code, tt {
+  margin: 0 0px;
+  padding: 0px 0px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px;
+}
+
+pre>code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+}
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px;
+}
+
+pre code, pre tt {
+  background-color: transparent;
+  border: none;
+}
+
+kbd {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #DDDDDD;
+    background-image: linear-gradient(#F1F1F1, #DDDDDD);
+    background-repeat: repeat-x;
+    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+    border-image: none;
+    border-radius: 2px 2px 2px 2px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 10px;
+    padding: 1px 4px;
+}
+
+/* QUOTES
+=============================================================================*/
+
+blockquote {
+  border-left: 4px solid #DDD;
+  padding: 0 15px;
+  color: #191970;
+}
+
+blockquote>:first-child {
+  margin-top: 0px;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0px;
+}
+
+/* HORIZONTAL RULES
+=============================================================================*/
+
+hr {
+  clear: both;
+  margin: 15px 0;
+  height: 0px;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  border-bottom: 4px solid #ddd;
+  padding: 0;
+}
+
+/* TABLES
+=============================================================================*/
+
+table th {
+  font-weight: bold;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 6px 13px;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* IMAGES
+=============================================================================*/
+
+img {
+  max-width: 100%
+}
+</style>
+</head>
+<body>
+<h1>排序☞冒泡排序</h1>
+<hr />
+<h3>冒泡排序方法：</h3>
+<pre><code>1. 将被排序的记录数组R[1..n]垂直排列，每个记录R[i]看作是重量为R[i].key的气泡。
+    根据轻气泡不能在重气泡之下的原则，从下往上扫描数组R：凡扫描到违反本原则的轻气泡，就使其向上&quot;飘浮&quot;。
+    如此反复进行，直到最后任何两个气泡都是轻者在上，重者在下为止。
+    a. 初始
+    b. R[1..n]为无序区。
+    c. 第一趟扫描
+2. 从无序区底部向上依次比较相邻的两个气泡的重量，若发现轻者在下、重者在上，则交换二者的位置。
+    即依次比较(R[n]，R[n-1])，(R[n-1]，R[n-2])，…，(R[2]，R[1])；对于每对气泡(R[j+1]，R[j])，若R[j+1].key
+    a. 第一趟扫描完毕时，&quot;最轻&quot;的气泡就飘浮到该区间的顶部，即关键字最小的记录被放在最高位置R[1]上。
+    b. 第二趟扫描
+        i. 扫描R[2..n]。扫描完毕时，&quot;次轻&quot;的气泡飘浮到R[2]的位置上……
+        ii. 最后，经过n-1 趟扫描可得到有序区R[1..n]
+【注意】：
+    a. 第i趟扫描时，R[1..i-1]和R[i..n]分别为当前的有序区和无序区。
+        扫描仍是从无序区底部向上直至该区顶部。扫描完毕时，该区中最轻气泡飘浮到顶部位置R[i]上，结果是R[1..i]变为新的有序区。
+
+【冒泡演示】：
+http://student.zjzk.cn/course_ware/data_structure/web/flashhtml/maopaopaixu.htm
+</code></pre>
+
+<h3>代码示例</h3>
+<pre><code>&lt;?php
+/**
+ * 数组冒泡排序(从小到大)-1
+ */
+function bubble_arr1($arr){
+    $arrLen = count($arr);
+    for ($i=0; $i &lt;$arrLen; $i++) { 
+        for ($j=$arrLen-1; $j &gt; $i; $j--) { 
+            if ($arr[$j] &lt; $arr[$j-1]) {
+                $tmp = $arr[$j-1];
+                $arr[$j-1] = $arr[$j];
+                $arr[$j] = $tmp;
+            }
+        }
+
+    }
+    return $arr;
+}
+$test_arr = array(&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;8&quot;,&quot;15&quot;,&quot;23&quot;,&quot;4&quot;);
+$bubble1_start = microtime(true);
+$result = bubble_arr1($test_arr);
+$bubble1_end = microtime(true);
+var_dump($result, $bubble1_end-$bubble1_start);//0.00013589859008789
+
+/**
+ * 改进数组冒泡排序-2
+ * 如果没有发生比较表示原数组已经正确排序过了！
+ */
+function bubble_arr2($arr){
+    $arrLen = count($arr);
+    if ($arrLen == 0) { return $arr; }
+
+    for ($i=0; $i &lt;$arrLen; $i++) { 
+        $exchange = FALSE;
+        for ($j=$arrLen-1; $j &gt; $i; $j--) { 
+            if ($arr[$j] &lt; $arr[$j-1]) {
+                $tmp = $arr[$j-1];
+                $arr[$j-1] = $arr[$j];
+                $arr[$j] = $tmp;
+                $exchange = true;
+            }
+        }
+
+        if ($exchange == false) { return $arr; }
+    }
+    return $arr;
+}
+$bubble2_start = microtime(true);
+$result2 = bubble_arr2($test_arr);
+$bubble2_end = microtime(true);
+var_dump($result2, $bubble2_end-$bubble2_start);//0.00010991096496582
+
+function bubble_arr22($arr){
+    $arrLen = count($arr) - 1;
+    $flag = true;
+
+    while ($flag) {
+        $flag = false;
+
+        for ($i=$arrLen; $i &gt; 0 ; $i--) { 
+            // var_dump($i);
+            // var_dump($arr[$i], $arr[$i-1]);
+            if ($arr[$i] &lt; $arr[$i-1]) {
+                $tmp = $arr[$i-1];
+                $arr[$i-1] = $arr[$i];
+                $arr[$i] = $tmp;
+                $flag = true;
+            }
+        }
+
+        $arrLen--;
+    }
+    return $arr;
+}
+
+$bubble2_start = microtime(true);
+$result3 = bubble_arr22($test_arr);
+$bubble2_end = microtime(true);
+var_dump($result3, $bubble2_end-$bubble2_start);//0.00010991096496582
+
+/**
+ * 改进数组冒泡排序-3
+ *   如果有100个数的数组，仅前面10个无序，后面90个都已排好序且都大于前面10个数字,
+ *   那么在第一趟遍历后，最后发生交换的位置必定小于10，且这个位置之后的数据必定已经有序了，
+ *   记录下这位置，第二次只要从数 组头部遍历到这个位置就可以了。 
+ */
+function bubble_arr3($arr){
+    $arrLen = count($arr) - 1;
+    $flag = $arrLen-1;
+
+    while ($flag &gt; 0) {
+        $k = $flag;
+        $flag = -1;
+
+        for ($i=$k; $i &gt; 0 ; $i--) { 
+            if ($arr[$i] &lt; $arr[$i-1]) {
+                $tmp = $arr[$i-1];
+                $arr[$i-1] = $arr[$i];
+                $arr[$i] = $tmp;
+
+                $flag = $i;
+            }
+        }
+
+    }
+    return $arr;
+}
+
+$bubble3_start = microtime(true);
+$result3 = bubble_arr3($test_arr);
+$bubble3_end = microtime(true);
+var_dump($result3, $bubble3_end-$bubble3_start);//0.00010991096496582
+</code></pre>
+
+<p>1</p>
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
